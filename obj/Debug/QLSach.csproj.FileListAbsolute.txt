@@ -1,0 +1,16 @@
+D:\Dotnet\QLSach\bin\Debug\QLSach.exe.config
+D:\Dotnet\QLSach\bin\Debug\QLSach.exe
+D:\Dotnet\QLSach\bin\Debug\QLSach.pdb
+D:\Dotnet\QLSach\bin\Debug\EntityFramework.dll
+D:\Dotnet\QLSach\bin\Debug\EntityFramework.SqlServer.dll
+D:\Dotnet\QLSach\bin\Debug\EntityFramework.xml
+D:\Dotnet\QLSach\bin\Debug\EntityFramework.SqlServer.xml
+D:\Dotnet\QLSach\obj\Debug\QLSach.csprojAssemblyReference.cache
+D:\Dotnet\QLSach\obj\Debug\QLSach.Form1.resources
+D:\Dotnet\QLSach\obj\Debug\QLSach.GUI.Form2.resources
+D:\Dotnet\QLSach\obj\Debug\QLSach.Properties.Resources.resources
+D:\Dotnet\QLSach\obj\Debug\QLSach.csproj.GenerateResource.cache
+D:\Dotnet\QLSach\obj\Debug\QLSach.csproj.CoreCompileInputs.cache
+D:\Dotnet\QLSach\obj\Debug\QLSach.csproj.CopyComplete
+D:\Dotnet\QLSach\obj\Debug\QLSach.exe
+D:\Dotnet\QLSach\obj\Debug\QLSach.pdb
