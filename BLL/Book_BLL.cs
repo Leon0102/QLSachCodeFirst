@@ -42,13 +42,17 @@ namespace QLSach.BLL
         {
             return Book_DAL.Instance.SaveBook(b);
         }
-        public void DelBBLL(Book s)
+        public bool DelBBLL(Book s)
         {
-            Book_DAL.Instance.DelBook(s);
+           return Book_DAL.Instance.DelBook(s);
         }
         public List<Book> SearchBookIDBLL(int s)
         {
             return Book_DAL.Instance.SearchBookID(s);
+        }
+        public List<Book> SearchBookName(string s)
+        {
+            return Book_DAL.Instance.SearchBookName(s);
         }
         public List<Book> SortBookDownBLL()
         {

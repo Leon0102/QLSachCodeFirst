@@ -10,10 +10,8 @@ namespace QLSach.DTO
 {
     public class Book
     {
-        [Key]
-        [Required]
+        [Key][Required]
         public int B_ID { get; set; }
-        [Required]
         public string B_Name { get; set; }
         public DateTime B_PublishDate { get; set; }
         public Boolean B_Status { get; set; }

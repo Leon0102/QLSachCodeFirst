@@ -46,11 +46,24 @@ namespace QLSach.DAL
             dt = l1.ToList();
             return dt;
         }
-        public void DelBook(Book s)
+        public bool DelBook(Book s)
         {
-            Book del = db.Books.Where(p => p.B_ID.Equals(s.B_ID)).Select(p => p).SingleOrDefault();
-            db.Books.Remove(del);
-            db.SaveChanges();
+            bool result = false;
+            try
+            {
+                Book del = db.Books.Where(p => p.B_ID.Equals(s.B_ID)).Select(p => p).SingleOrDefault();
+                db.Books.Remove(del);
+            }
+            catch (Exception)
+            {
+                return result;
+            }
+            finally
+            {
+                db.SaveChanges();
+                result = true;
+            }
+            return result;
         }
         public bool SaveBook(Book s)
         {
@@ -95,7 +108,7 @@ namespace QLSach.DAL
         {
             List<Book> lsv = new List<Book>();
             var l0 = from p in db.Books
-                     orderby p.B_Name descending
+                     orderby p.B_Name ascending
                      select p;
             lsv = l0.ToList();
             return lsv;
@@ -104,7 +117,7 @@ namespace QLSach.DAL
         {
             List<Book> lsv = new List<Book>();
             var l0 = from p in db.Books
-                     orderby p.B_Name ascending
+                     orderby p.B_Name descending
                      select p;
             lsv = l0.ToList();
             return lsv;
@@ -113,6 +126,13 @@ namespace QLSach.DAL
         {
             var l = from p in db.Books
                     where p.B_ID == s
+                    select p;
+            return l.ToList();
+        }
+        public List<Book> SearchBookName(string s)
+        {
+            var l = from p in db.Books
+                    where p.B_Name == s
                     select p;
             return l.ToList();
         }

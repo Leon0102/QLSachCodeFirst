@@ -68,8 +68,15 @@ namespace QLSach
         private void btnDel_Click(object sender, EventArgs e)
         {
             int b_id = Convert.ToInt32(dgvBook.SelectedCells[0].OwningRow.Cells["B_ID"].Value);
-            Book_BLL.Instance.DelBBLL(Book_BLL.Instance.GetBbyID_BLL(b_id));
-           
+
+            if(Book_BLL.Instance.DelBBLL(Book_BLL.Instance.GetBbyID_BLL(b_id)))
+            {
+                MessageBox.Show("Deleted successfully!", "Information", MessageBoxButtons.OK);
+            }
+            else
+            {
+                MessageBox.Show("Failed to Delete!", "Information", MessageBoxButtons.OK);
+            }
             LoadData(((CBBItem)cbbTG.SelectedItem).Value);
         }
 
@@ -96,7 +103,11 @@ namespace QLSach
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            dgvBook.DataSource = Book_BLL.Instance.SearchBookIDBLL(Convert.ToInt32(txbSearch.Text));
+            if (txbSearch.Text != "")
+            {
+                List<Book> blist = dgvBook.DataSource as List<Book>;
+                dgvBook.DataSource = Book_BLL.Instance.SearchBookIDBLL(Convert.ToInt32(txbSearch.Text));
+            }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
