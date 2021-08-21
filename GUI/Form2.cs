@@ -14,10 +14,11 @@ namespace QLSach.GUI
 {
     public partial class Form2 : Form
     {
-        public delegate void MyDel(int id);
+        
+        public delegate void MyDel(int id,  string name);
         public MyDel d { get; set; }
-        private int BookID;
-        public Form2(int ms)
+        private string BookID;
+        public Form2(string ms)
         {
             InitializeComponent();
             SetCBB();
@@ -44,29 +45,27 @@ namespace QLSach.GUI
         }
         public void SetGUI()
         {
-            if(Book_BLL.Instance.GetBbyID_BLL(BookID)!=null)
+            dtDate.CustomFormat = "MM/dd/yyyy";
+            txbMS.Enabled = false;
+            Book b = Book_BLL.Instance.GetBbyID_BLL(BookID);
+            txbName.Text = b.B_Name;
+            txbMS.Text = Convert.ToString(b.B_ID);
+            dtDate.Value = b.B_PublishDate;
+            if (b.B_Status == true)
             {
-                txbMS.Enabled = false;
-                Book b = Book_BLL.Instance.GetBbyID_BLL(BookID);
-                txbName.Text = b.B_Name;
-                txbMS.Text = Convert.ToString(b.B_ID);
-                dtDate.Value = b.B_PublishDate;
-                if (b.B_Status == true)
-                {
-                    rbA.Checked = true;
-                }
-                else
-                {
-                    rbU.Checked = true;
-                }
-                cbbTG.SelectedItem = cbbTG.Items[Convert.ToInt32(b.A_ID) - 1];
+                rbA.Checked = true;
             }
-
+            else
+            {
+                rbU.Checked = true;
+            }
+            cbbTG.SelectedItem = cbbTG.Items[Convert.ToInt32(b.A_ID) - 1];
+            dtDate.Value = b.B_PublishDate;
         }
         private void btnOK_Click(object sender, EventArgs e)
         {
             Book b = new Book();
-            b.B_ID = Convert.ToInt32(txbMS.Text);
+            b.B_ID = txbMS.Text;
             b.B_Name = txbName.Text;
             b.A_ID = ((CBBItem)cbbTG.SelectedItem).Value;
             b.B_PublishDate = dtDate.Value;
@@ -79,12 +78,11 @@ namespace QLSach.GUI
             {
                 MessageBox.Show("Failed to save", "Information", MessageBoxButtons.OK);
             }
-            d(Form1.a_id);
+            d(0,"");
             this.Dispose();
         }
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            d(Form1.a_id);
             this.Dispose();
         }
     }

@@ -8,8 +8,11 @@ using System.Threading.Tasks;
 
 namespace QLSach.BLL
 {
+    
+
     public class Book_BLL
     {
+        public delegate bool Compare(Book o1, Book o2);
         private static Book_BLL _Instance;
         public static Book_BLL Instance
         {
@@ -26,17 +29,9 @@ namespace QLSach.BLL
         private Book_BLL()
         {
         }
-        public List<Book> GetListB_BLL()
-        {
-            return Book_DAL.Instance.GetListBooks_DAL();
-        }
-        public Book GetBbyID_BLL(int ID)
+        public Book GetBbyID_BLL(string ID)
         {
             return Book_DAL.Instance.GetBookbyID(ID);
-        }
-        public List<Book> GetListBbyID_BLL(int id)
-        {
-            return Book_DAL.Instance.GetListBookbyID(id);
         }
         public bool SaveB_BLL(Book b)
         {
@@ -46,13 +41,9 @@ namespace QLSach.BLL
         {
            return Book_DAL.Instance.DelBook(s);
         }
-        public List<Book> SearchBookIDBLL(int s)
+        public List<Book> SearchBookBLL(int id, string s)
         {
-            return Book_DAL.Instance.SearchBookID(s);
-        }
-        public List<Book> SearchBookName(string s)
-        {
-            return Book_DAL.Instance.SearchBookName(s);
+            return Book_DAL.Instance.SearchBookID(id,s);
         }
         public List<Book> SortBookDownBLL()
         {
@@ -70,6 +61,21 @@ namespace QLSach.BLL
         {
             return Book_DAL.Instance.SortBookNameDown();
         }
-
+        //public List<Book> SortBookList_BLL(List<Book> blist, Compare cmp)
+        //{
+        //    for (int i = 0; i < blist.Count - 1; ++i)
+        //    {
+        //        for (int j = i + 1; j < blist.Count; ++j)
+        //        {
+        //            if (cmp(blist[i], blist[j]))
+        //            {
+        //                Book temp = blist[i];
+        //                blist[i] = blist[j];
+        //                blist[j] = temp;
+        //            }
+        //        }
+        //    }
+        //    return blist;
+        //}
     }
 }

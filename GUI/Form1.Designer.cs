@@ -39,6 +39,7 @@
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.dgvBook = new System.Windows.Forms.DataGridView();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBook)).BeginInit();
             this.SuspendLayout();
             // 
@@ -150,16 +151,28 @@
             this.dgvBook.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvBook.Location = new System.Drawing.Point(12, 79);
             this.dgvBook.Name = "dgvBook";
+            this.dgvBook.ReadOnly = true;
             this.dgvBook.RowHeadersWidth = 51;
             this.dgvBook.RowTemplate.Height = 24;
+            this.dgvBook.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvBook.Size = new System.Drawing.Size(1002, 364);
             this.dgvBook.TabIndex = 11;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(594, 34);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(71, 17);
+            this.label2.TabIndex = 22;
+            this.label2.Text = "Tên sách:";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1027, 536);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.txbSearch);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.label1);
@@ -192,6 +205,7 @@
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.DataGridView dgvBook;
+        private System.Windows.Forms.Label label2;
     }
 }
 

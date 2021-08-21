@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace QLSach.DTO
 {
-    class CreateDB:CreateDatabaseIfNotExists<QLSachCF>
+    public class CreateDB:CreateDatabaseIfNotExists<QLSachCF>
     {
         protected override void Seed(QLSachCF context)
         {
@@ -19,10 +19,10 @@ namespace QLSach.DTO
             });
             context.Books.AddRange(new Book[]
             {
-                 new Book{B_ID = 101, B_Name = "How To Get Rich", B_PublishDate = Convert.ToDateTime("2021-08-08"), B_Status = true, A_ID = 1  },
-                new Book{B_ID = 101, B_Name = "How To Sell Drugs Online", B_PublishDate = Convert.ToDateTime("2021-07-08"), B_Status = true, A_ID = 2  },
-                new Book{B_ID = 101, B_Name = "How To Get Away With Murders", B_PublishDate = Convert.ToDateTime("2021-03-08"), B_Status = false, A_ID = 1  },
-                new Book{B_ID = 101, B_Name = "How To Be A Rapper", B_PublishDate = Convert.ToDateTime("2021-04-08"), B_Status = true, A_ID = 3},
+                 new Book{B_ID = "101", B_Name = "How To Get Rich", B_PublishDate = Convert.ToDateTime("2021-08-08"), B_Status = true, A_ID = 1  },
+                new Book{B_ID = "102", B_Name = "How To Sell Drugs Online", B_PublishDate = Convert.ToDateTime("2021-07-08"), B_Status = true, A_ID = 2  },
+                new Book{B_ID = "103", B_Name = "How To Get Away With Murders", B_PublishDate = Convert.ToDateTime("2021-03-08"), B_Status = false, A_ID = 1  },
+                new Book{B_ID = "104", B_Name = "How To Be A Rapper", B_PublishDate = Convert.ToDateTime("2021-04-08"), B_Status = true, A_ID = 3},
             });
         }
     }

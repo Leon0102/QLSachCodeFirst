@@ -131,6 +131,7 @@
             this.dtDate.Name = "dtDate";
             this.dtDate.Size = new System.Drawing.Size(230, 22);
             this.dtDate.TabIndex = 6;
+            this.dtDate.Value = new System.DateTime(2021, 8, 21, 0, 0, 0, 0);
             // 
             // label3
             // 

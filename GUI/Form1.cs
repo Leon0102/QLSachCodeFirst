@@ -36,20 +36,21 @@ namespace QLSach
             cbbTG.SelectedIndex = 0;
             a_id = ((CBBItem)cbbTG.SelectedItem).Value;
         }
-        public void LoadData(int a_id=0)
+        public void LoadData(int a_id=0, string a_name="")
         {
-            if (a_id == 0)
-            {
-                dgvBook.DataSource = Book_BLL.Instance.GetListB_BLL();
-            }
-            else
-            {
-                dgvBook.DataSource = Book_BLL.Instance.GetListBbyID_BLL(a_id);
-            }
+            //if (a_id == 0)
+            //{
+            //    dgvBook.DataSource = Book_BLL.Instance.GetListB_BLL();
+            //}
+            //else
+            //{
+            //    dgvBook.DataSource = Book_BLL.Instance.GetListBbyID_BLL(a_id);
+            //}
+            dgvBook.DataSource = Book_BLL.Instance.SearchBookBLL(a_id, a_name);
         }
         private void btnShow_Click(object sender, EventArgs e)
         {
-            LoadData();
+            LoadData(((CBBItem)cbbTG.SelectedItem).Value, "");
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -61,29 +62,27 @@ namespace QLSach
 
         private void cbbTG_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int id = ((CBBItem)cbbTG.SelectedItem).Value;
-            LoadData(id);
+            //int id = ((CBBItem)cbbTG.SelectedItem).Value;
+            //LoadData(id,txbSearch.Text);
         }
 
         private void btnDel_Click(object sender, EventArgs e)
         {
-            int b_id = Convert.ToInt32(dgvBook.SelectedCells[0].OwningRow.Cells["B_ID"].Value);
+            string b_id = dgvBook.CurrentRow.Cells[0].Value.ToString();
 
-            if(Book_BLL.Instance.DelBBLL(Book_BLL.Instance.GetBbyID_BLL(b_id)))
-            {
-                MessageBox.Show("Deleted successfully!", "Information", MessageBoxButtons.OK);
-            }
-            else
-            {
-                MessageBox.Show("Failed to Delete!", "Information", MessageBoxButtons.OK);
-            }
-            LoadData(((CBBItem)cbbTG.SelectedItem).Value);
+            Book_BLL.Instance.DelBBLL(Book_BLL.Instance.GetBbyID_BLL(b_id));
+            
+            LoadData(((CBBItem)cbbTG.SelectedItem).Value,"");
         }
 
         private void btnSort_Click(object sender, EventArgs e)
         {
+            //List<Book> blist = new List<Book>();
+            //blist = Book_BLL.Instance.GetListB_BLL();
+            //dgvBook.DataSource = Book_BLL.Instance.SortBookList_BLL(blist, Book.Compare_NameAZ);
             switch (cbbSort.SelectedIndex)
             {
+                 
                 case 0:
                     dgvBook.DataSource = Book_BLL.Instance.SortBookDownBLL();
                     break;
@@ -103,18 +102,14 @@ namespace QLSach
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            if (txbSearch.Text != "")
-            {
-                List<Book> blist = dgvBook.DataSource as List<Book>;
-                dgvBook.DataSource = Book_BLL.Instance.SearchBookIDBLL(Convert.ToInt32(txbSearch.Text));
-            }
+                LoadData(((CBBItem)cbbTG.SelectedItem).Value, txbSearch.Text);
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            int b_id = Convert.ToInt32(dgvBook.CurrentRow.Cells[0].Value);
+            string b_id = dgvBook.CurrentRow.Cells[0].Value.ToString();
             Form2 f = new Form2(b_id);
-            f.d = new Form2.MyDel(LoadData);
+            f.d = new Form2.MyDel(this.LoadData);
             f.ShowDialog();
         }
     }

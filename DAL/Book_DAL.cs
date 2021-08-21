@@ -26,25 +26,26 @@ namespace QLSach.DAL
         {
         }
         QLSachCF db = new QLSachCF();
-        public List<Book> GetListBooks_DAL()
-        {
-            List<Book> lsv = new List<Book>();
-            var l0 = from p in db.Books
-                     select p;
-            lsv = l0.ToList();
-            return lsv;
-        }
-        public Book GetBookbyID(int b_id)
+        //public List<Book> GetListBooks_DAL()
+        //{
+        //    List<Book> lsv = new List<Book>();
+        //    var l0 = from p in db.Books
+        //             select p;
+        //    lsv = l0.ToList();
+        //    return lsv;
+        //}
+
+        //public List<Book> GetListBookbyID(int A_ID)
+        //{
+        //    List<Book> dt = new List<Book>();
+        //    var l1 = db.Books.Select(p => p).Where(p => p.A_ID == A_ID);
+        //    dt = l1.ToList();
+        //    return dt;
+        //}
+        public Book GetBookbyID(string b_id)
         {
             Book s = db.Books.Find(b_id);
             return s;
-        }
-        public List<Book> GetListBookbyID(int A_ID)
-        {
-            List<Book> dt = new List<Book>();
-            var l1 = db.Books.Select(p => p).Where(p => p.A_ID == A_ID);
-            dt = l1.ToList();
-            return dt;
         }
         public bool DelBook(Book s)
         {
@@ -68,23 +69,27 @@ namespace QLSach.DAL
         public bool SaveBook(Book s)
         {
             bool result = false;
-            Book _s = db.Books.Where(x => x.B_ID == s.B_ID).Select(x => x).SingleOrDefault();
-            if (_s != null)
-            {
-                // UPDATE
-                _s.B_Name = s.B_Name;
-                _s.A_ID = s.A_ID;
-                _s.B_PublishDate = s.B_PublishDate;
-                _s.B_Status = s.B_Status;
-            }
+            if (s.B_ID == "") return result;
             else
             {
-                // ADD
-                db.Books.Add(s);
+                Book _s = db.Books.Where(x => x.B_ID == s.B_ID).Select(x => x).SingleOrDefault();
+                if (_s != null)
+                {
+                    // UPDATE
+                    _s.B_Name = s.B_Name;
+                    _s.A_ID = s.A_ID;
+                    _s.B_PublishDate = s.B_PublishDate;
+                    _s.B_Status = s.B_Status;
+                }
+                else
+                {
+                    // ADD
+                    db.Books.Add(s);
+                }
+                db.SaveChanges();
+                result = true;
+                return result;
             }
-            db.SaveChanges();
-            result = true;
-            return result;
         }
         public List<Book> SortBookDown()
         {
@@ -108,7 +113,7 @@ namespace QLSach.DAL
         {
             List<Book> lsv = new List<Book>();
             var l0 = from p in db.Books
-                     orderby p.B_Name ascending
+                     orderby p.B_Name descending
                      select p;
             lsv = l0.ToList();
             return lsv;
@@ -117,24 +122,31 @@ namespace QLSach.DAL
         {
             List<Book> lsv = new List<Book>();
             var l0 = from p in db.Books
-                     orderby p.B_Name descending
+                     orderby p.B_Name ascending
                      select p;
             lsv = l0.ToList();
             return lsv;
         }
-        public List<Book> SearchBookID(int s)
+        public List<Book> SearchBookID(int a_id,  string bookname)
         {
+            if (a_id == 0)
+            {
+                var l1 = from p in db.Books
+                        where p.B_Name.Contains(bookname)
+                        select p;
+                return l1.ToList();
+            }
             var l = from p in db.Books
-                    where p.B_ID == s
+                    where p.B_Name.Contains(bookname) && p.Author.A_ID == a_id
                     select p;
-            return l.ToList();
+                    return l.ToList();
         }
-        public List<Book> SearchBookName(string s)
-        {
-            var l = from p in db.Books
-                    where p.B_Name == s
-                    select p;
-            return l.ToList();
-        }
+        //public List<Book> SearchBookName(string s)
+        //{
+        //    var l = from p in db.Books
+        //            where p.B_Name == s
+        //            select p;
+        //    return l.ToList();
+        //}
     }
 }
